@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VKCOJCS AI Chatbot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        .voice_btn {
+            background-color: white;
+            border: none;
+            color: #ff6b6b; /* Red color */
+            padding: 0 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .voice_btn:hover {
+            color: #ff4757; /* Darker red */
+            background-color: rgba(255, 107, 107, 0.1);
+        }
+
+        .voice_btn.listening {
+            color: #ff6b6b;
+            animation: pulse 1.5s infinite;
+        }
+
+        .voice_btn:focus {
+            outline: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .voice_btn i {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center h-100">
+            <div class="col-md-8 col-xl-6 chat">
+                <div class="card">
+                    <div class="card-header msg_head">
+                        <div class="d-flex bd-highlight align-items-center">
+                            <!-- Left Side: REFU AI Info -->
+                            <div class="img_cont">
+                                <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" 
+                                     class="rounded-circle user_img" alt="AI Avatar">
+                                <span class="online_icon"></span>
+                            </div>
+                            <div class="user_info">
+                                <span class="ms-1">VKCOJCS AI</span>
+                                <p class="ms-1">Your Virtual Assistant</p>
+                            </div>
+
+                            <!-- Right Side: Refresh Button -->
+                            <div class="ml-auto">
+                                <button type="button" id="refreshButton" 
+                                        class="btn btn-light btn-sm refresh_btn">
+                                    <i class="fas fa-sync-alt"></i> 
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="messageFormeight" class="card-body msg_card_body">
+                        <!-- Messages will be inserted here -->
+                    </div>
+                    <div class="card-footer">
+                        <form id="messageArea" class="input-group">
+                            <input type="text" id="text" name="msg" 
+                                   placeholder="Type your message..." 
+                                   autocomplete="off" 
+                                   class="form-control type_msg" required>
+                            <div class="input-group-append">
+                                <button type="button" id="voiceButton" 
+                                        class="input-group-text voice_btn"
+                                        title="Voice Search">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                                <button type="submit" id="send" 
+                                        class="input-group-text send_btn" disabled>
+                                    <i class="fas fa-location-arrow"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+</body>
+</html>
